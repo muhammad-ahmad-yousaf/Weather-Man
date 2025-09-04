@@ -44,6 +44,7 @@ def main():
         folder_path = "data\Dubai_weather"
     else:
         print("Please select Correct option!!")
+        return
     data = load_data(folder_path)
     yearly = YearlyMax(data)
     monthly_avg = MonthlyAverage(data)
