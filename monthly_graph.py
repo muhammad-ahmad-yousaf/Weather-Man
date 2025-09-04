@@ -9,7 +9,9 @@ class MonthlyGraph:
         month_data = [d for d in self.data if d["Date"].year == year and d["Date"].month == month]
 
         if not month_data:
+            print("\n-------------------------------------------------\n\n")
             print(f"No data for {year}-{month:02d}")
+            print("\n-------------------------------------------------\n\n")
             return
 
         print(f"\n{month_data[0]['Date'].strftime('%B %Y')}")
