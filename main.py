@@ -32,10 +32,18 @@ def load_data(folder_path):
 				except Exception:
 					continue
 				all_data.append(record)
-
 	return all_data
 def main():
-	folder_path = input("Enter weather data folder path: ").strip()
+	print("1- Lahore\n2- Murree\n3- Dubai")
+	city_option=int(input("Select the City: "))
+	if city_option == 1:
+		folder_path = "data\lahore_weather"
+	elif city_option == 2:
+		folder_path = "data\Murree_weather"
+	elif city_option == 3:
+		folder_path = "data\Dubai_weather"
+	else:
+		print("Please select Correct option!! ")
 	data = load_data(folder_path)
 	yearly = YearlyMax(data)
 	monthly_avg = MonthlyAverage(data)
