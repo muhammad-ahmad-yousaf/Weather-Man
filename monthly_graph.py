@@ -16,12 +16,16 @@ class MonthlyGraph:
 
         print(f"\n{month_data[0]['Date'].strftime('%B %Y')}")
         for d in month_data:
+            if not d["Max TemperatureC"].strip() or not d["Min TemperatureC"].strip():
+                continue  
+            try:
+                high = int(d["Max TemperatureC"])
+                low  = int(d["Min TemperatureC"])
+            except ValueError:
+                continue 
             day = d["Date"].day
-            high = int(d["Max TemperatureC"])
-            low  = int(d["Min TemperatureC"])
-
             if combined:
-                print(f"{day:02d} {Fore.RED}{'+'*high}{Style.RESET_ALL} {low}C - {high}C")
+                print(f"{day:02d} {Fore.BLUE}{'+'*low}{Style.RESET_ALL}{Fore.RED}{'+'*high}{Style.RESET_ALL} {low}C - {high}C")
             else:
                 print(f"{day:02d} {Fore.RED}{'+'*high}{Style.RESET_ALL} {high}C")
                 print(f"{day:02d} {Fore.BLUE}{'+'*low}{Style.RESET_ALL} {low}C")

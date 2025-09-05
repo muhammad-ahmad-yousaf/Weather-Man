@@ -35,16 +35,23 @@ def load_data(folder_path):
     return all_data
 def main():
     print("1- Lahore\n2- Murree\n3- Dubai")
-    city_option=int(input("Select the City: "))
-    if city_option == 1:
-        folder_path = "data\lahore_weather"
-    elif city_option == 2:
-        folder_path = "data\Murree_weather"
-    elif city_option == 3:
-        folder_path = "data\Dubai_weather"
-    else:
-        print("Please select Correct option!!")
-        return
+    while True:
+        city_input = input("Select the City: ").strip()
+        if not city_input.isdigit():
+            print("Please input valid option (1-3)")
+            continue
+        else:
+            city_option=int(city_input)
+            if city_option == 1:
+                folder_path = "data\lahore_weather"
+            elif city_option == 2:
+                folder_path = "data\Murree_weather"
+            elif city_option == 3:
+                folder_path = "data\Dubai_weather"
+            else:
+                print("Please select Correct option!!")
+                continue
+        break
     data = load_data(folder_path)
     yearly = YearlyMax(data)
     monthly_avg = MonthlyAverage(data)
@@ -58,20 +65,89 @@ def main():
         print("4 - Display monthly the highest and lowest temperature on each day. In same line Highest in red and lowest in blue.")
         print("5 - Exist\n")
         print("===================================================================================================================\n")
-        user_option=int(input("Enter your option: "))
+
+        while True:
+            user_input = input("Enter your option: ").strip()
+            if not user_input.isdigit():
+                print("Please enter a valid number (1-5) !!")
+                continue
+            user_option = int(user_input)
+            break
         if user_option == 1:
-            year = int(input("Enter year (like 2002): "))
+            while True:
+                input_year = input("Enter year (like 2002): ")
+                if len(input_year)!=4 or not input_year.isdigit() or not 1900<=int(input_year)<=2600:
+                    print("Please enter correct year format YYYY")
+                    continue
+                else:
+                    year=int(input_year)
+                    break
             yearly.get_yearly_summary(year)
         elif user_option == 2:
-            year = int(input("Enter year (like 2005): "))
-            month = int(input("Enter month (range 1-12): "))
+            while True:
+                input_year = input("Enter year (like 2002): ")
+                if len(input_year)!=4 or not input_year.isdigit() or not 1900<=int(input_year)<=2600:
+                    print("Please enter correct year YYYY !!")
+                    continue
+                else:
+                    year=int(input_year)
+                    break
+            while True:
+                input_month = input("Enter month (range 1-12): ")
+                if input_month.isdigit():
+                    month=int(input_month)
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
+                if 1 <= month <= 12:
+                    break
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
+            monthly_avg.get_monthly_average(year,month)
         elif user_option == 3:
-            year = int(input("Enter year (like 2011): "))
-            month = int(input("Enter month (range 1-12): "))
+            while True:
+                input_year = input("Enter year (like 2002): ")
+                if len(input_year)!=4 or not input_year.isdigit() or not 1900<=int(input_year)<=2600:
+                    print("Please enter correct year YYYY !!")
+                    continue
+                else:
+                    year=int(input_year)
+                    break
+            while True:
+                input_month = input("Enter month (range 1-12): ")
+                if input_month.isdigit():
+                    month=int(input_month)
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
+                if 1 <= month <= 12:
+                    break
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
             monthly_graph.monthly_bar_chart(year, month, combined=False)
         elif user_option == 4:
-            year = int(input("Enter year (like 2011): "))
-            month = int(input("Enter month (range 1-12): "))
+            while True:
+                input_year = input("Enter year (like 2002): ")
+                if len(input_year)!=4 or not input_year.isdigit() or not 1900<=int(input_year)<=2600:
+                    print("Please enter correct year YYYY !!")
+                    continue
+                else:
+                    year=int(input_year)
+                    break
+            while True:
+                input_month = input("Enter month (range 1-12): ")
+                if input_month.isdigit():
+                    month=int(input_month)
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
+                if 1 <= month <= 12:
+                    break
+                else:
+                    print("Please enter correct month (1-12) !!")
+                    continue
             monthly_graph.monthly_bar_chart(year, month, combined=True)
         elif user_option == 5:
             print("Exiting Weather Man.")
